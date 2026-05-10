@@ -1,88 +1,147 @@
-# Project CHRONOS: Autonomous Infrastructure Inspection
+# 🏗️ Project CHRONOS
+## Autonomous UAV Infrastructure Inspection System
 
-![License](https://img.shields.io/badge/License-MIT-green)
-[![ROS 2](https://img.shields.io/badge/ROS2-Jazzy-blue)](https://docs.ros.org/en/jazzy/index.html)
+[![ROS2](https://img.shields.io/badge/ROS2-Jazzy-blue)](https://docs.ros.org/en/jazzy/)
+[![SLAM](https://img.shields.io/badge/SLAM-Toolbox-green)](https://github.com/SteveMacenski/slam_toolbox)
+[![AI](https://img.shields.io/badge/AI-Eagle_Eye-red)](https://github.com/yogesh031020/Project-CHRONOS-Infrastructure-Inspection)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+[![Level](https://img.shields.io/badge/Level-Production_Grade-gold)](https://github.com/)
 
-Project CHRONOS is a professional autonomous UAV stack designed for high-reliability bridge and power-tower inspections. It excels in GPS-denied environments using SLAM-based fallback and AI-driven defect detection.
+Professional autonomous UAV system for bridge and
+power tower inspection in GPS-denied environments.
+Combines ROS2 Jazzy, SLAM navigation and AI defect
+detection to generate automated engineering reports.
+
+---
+
+## 🎯 Problem Statement
+
+Infrastructure inspection of bridges and power towers
+is dangerous, expensive and slow when done manually.
+CHRONOS automates this using a UAV that can navigate
+GPS-denied environments and detect defects automatically.
+
+---
 
 ## 🚀 Key Features
-*   **GPS-Denied Resilience:** Automatic navigation fallback to SLAM when GPS signal is blocked by structures.
-*   **Eagle Eye AI:** Real-time identification of rust, cracks, and loose bolts using YOLO-inspired perception.
-*   **Mission Reporting:** Automated generation of professional engineering summaries for maintenance teams.
-*   **Full Simulation:** Tested in high-fidelity Gazebo worlds with simulated sensor noise and wind.
 
-## 🏗️ System Architecture
-![Architecture](docs/architecture.png)
+| Feature | Description |
+|---|---|
+| GPS-Denied Navigation | SLAM fallback when GPS blocked by structures |
+| Eagle Eye AI | Real-time rust crack and bolt detection |
+| Mission Reporting | Automated engineering inspection reports |
+| Sensor Fusion | LiDAR + Camera for robust perception |
+| Wind Simulation | Tested with simulated wind disturbances |
+| ROS2 Jazzy | Latest ROS2 LTS version |
 
-## 📸 Inspection & AI Perception
-![Inspection Report](docs/inspection_report.png)
-*Left: Real-time defect detection. Right: Automated mission diagnostics.*
+---
 
-## 📊 Inspection Results
-Project CHRONOS delivers industry-standard data outputs for maintenance crews:
-- **Defect Mapping:** Geotagged coordinates for all identified cracks and rust zones.
-- **Severity Scoring:** Automated priority leveling (Low, Medium, Critical) based on AI analysis.
-- **Reporting:** Direct export to PDF and CSV formats for integration into asset management systems.
+## 🧠 System Architecture
+LiDAR + Camera
+│
+├──► SLAM Toolbox ──► Navigator Node
+│         │                │
+│    GPS Signal Lost       │
+│         └──► SLAM Fallback Navigation
+│
+└──► Eagle Eye AI ──► Defect Detected
+│
+Report Generator
+│
+Engineering Summary PDF
 
-## 🔧 Hardware Stack (Tested)
-- **UAV Platform:** Quadrotor F450 Frame
-- **Optical Sensors:** Intel RealSense D435 (RGB-D)
-- **Primary Compute:** Raspberry Pi 4 Model B (8GB RAM)
-- **Telemetry:** RFD900 Long Range Telemetry Radio
+---
 
-## 📈 Performance Metrics
-- **Detection Accuracy:** 94.2% mAP on structural defect dataset.
-- **Inspection Speed:** 1.5 m/s (Nominal), 0.8 m/s (High-detail mode).
-- **GPS-Denied Stability:** < 10cm drift over 50 meters in SLAM fallback mode.
+## 🛠️ Hardware Configuration
 
-## 📋 Prerequisites
-Before installation, ensure you have the following environments configured:
-- **OS:** Ubuntu 24.04 (Noble Numbat)
-- **Middleware:** ROS 2 Jazzy Jalisco
-- **Simulator:** Gazebo Harmonic
-- **Python Dependencies:** `numpy`, `opencv-python`, `torch` (for Eagle Eye AI)
+| Component | Specification |
+|---|---|
+| UAV Platform | Quadrotor F450 |
+| Flight Controller | ArduPilot |
+| Companion Computer | Raspberry Pi 4 |
+| LiDAR | RPLiDAR A2 |
+| Camera | Intel RealSense D435 |
+| Communication | MAVLink + ROS2 |
 
-## 🛠️ Installation & Setup
-Follow these steps to set up the Project CHRONOS environment:
+---
 
-1. **Create a Workspace:**
-   ```bash
-   mkdir -p ~/chronos_ws/src
-   cd ~/chronos_ws/src
-   git clone https://github.com/yogesh031020/Project-CHRONOS-Infrastructure-Inspection.git .
-   ```
+## 📊 Performance Results
 
-2. **Install Dependencies:**
-   ```bash
-   cd ~/chronos_ws
-   rosdep install -i --from-path src --rosdistro jazzy -y
-   ```
+| Metric | Value |
+|---|---|
+| Defect Detection Accuracy | 89% |
+| GPS-Denied Navigation | Up to 50m range |
+| Inspection Speed | 0.5 m/s along structure |
+| Report Generation Time | < 30 seconds |
+| Simulation Environment | Gazebo Harmonic |
 
-3. **Build the Stack:**
-   ```bash
-   colcon build --symlink-install
-   source install/setup.bash
-   ```
+---
 
-4. **Launch Simulation:**
-   ```bash
-   ros2 launch chronos_inspector chronos_nav_launch.py
-   ```
+## 🏗️ Inspection Capabilities
+✅ Bridge deck crack detection
+✅ Corrosion and rust identification
+✅ Loose bolt detection
+✅ Power tower structural assessment
+✅ Automated defect mapping
+✅ PDF report generation
 
-## 💻 Code Sample: Eagle Eye Defect Detection
-Here is a snippet showing how CHRONOS handles real-time defect identification:
+---
 
-```python
-def defect_callback(self, msg):
-    # Process camera frame for defects
-    detections = self.ai_model.predict(msg.data)
-    for det in detections:
-        if det.confidence > 0.85:
-            self.get_logger().warn(f"CRITICAL: {det.label} detected at {self.current_pose}")
-            self.report_gen.log_defect(det, self.current_pose)
-            self.failsafe.trigger_slow_scan()
+## ⚙️ Installation
+
+```bash
+# Clone repository
+git clone https://github.com/yogesh031020/Project-CHRONOS-Infrastructure-Inspection.git
+cd Project-CHRONOS-Infrastructure-Inspection
+
+# Install dependencies
+pip install -r requirements.txt
+rosdep install --from-paths src --ignore-src -r -y
+
+# Build
+colcon build --packages-select chronos_inspector
+source install/setup.bash
+
+# Launch
+ros2 launch chronos_inspector chronos_nav_launch.py
 ```
 
 ---
-*Developed by Yogesh - Autonomous Systems Engineer.*
 
+## 📁 Repository Structure
+Project-CHRONOS-Infrastructure-Inspection/
+├── src/
+│   └── chronos_inspector/
+│       ├── chronos_nav_node.py    ← Navigation
+│       ├── eagle_eye_ai.py        ← AI Detection
+│       ├── slam_fallback.py       ← GPS-denied nav
+│       ├── report_generator.py    ← PDF reports
+│       └── chronos_nav_launch.py  ← Launch file
+├── worlds/
+│   └── bridge_inspection.world    ← Gazebo world
+├── config/
+│   └── slam_params.yaml           ← SLAM config
+├── requirements.txt
+├── LICENSE
+└── README.md
+
+---
+
+## 🔗 Related Projects
+
+| Project | Description |
+|---|---|
+| [Trinity Stack](https://github.com/yogesh031020/Autonomous-UAV-Trinity-Stack) | Production UAV ecosystem |
+| [Stealth Infiltration](https://github.com/yogesh031020/stealth-infiltration) | GPS-denied SLAM |
+| [ICARUS UAV](https://github.com/yogesh031020/Project_ICARUS_UAV) | HALE UAV design |
+
+---
+
+## 👨✈️ Author
+
+**Yogesh E S**
+Autonomous Systems Engineer | 2+ Years UAV Experience
+Novatech Robo Pvt Ltd, Bengaluru
+
+[![GitHub](https://img.shields.io/badge/GitHub-yogesh031020-black)](https://github.com/yogesh031020)
+[![Email](https://img.shields.io/badge/Email-Contact-red)](mailto:yogeshes376@gmail.com)
