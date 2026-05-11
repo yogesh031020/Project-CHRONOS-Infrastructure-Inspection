@@ -156,7 +156,7 @@ Project-CHRONOS-Infrastructure-Inspection/
 ## 👨✈️ Author
 
 **Yogesh E S**
-Autonomous Systems Engineer | 2+ Years UAV Experience
+Aeronautical Engineer | 2 Years UAV Experience
 Novatech Robo Pvt Ltd, Bengaluru
 
 [![GitHub](https://img.shields.io/badge/GitHub-yogesh031020-black)](https://github.com/yogesh031020)
